@@ -77,7 +77,7 @@ u8 is_equal(u16 let1, u16 let2)
 
 u16 bit_to_letter(u32 bit)
 {
-	u8 i = 0;
+	u16 i = 0;
 	while(!(bit & 1)) {
 		i++;
 		bit >>= 1;
@@ -85,7 +85,22 @@ u16 bit_to_letter(u32 bit)
 	return i + CYR_UTF8_CAP_START;
 }
 	
-u32 
+u8 bit_to_index(u32 bit)
+{
+	u8 i = 0;
+	while(!(bit & 1)) {
+		i++;
+		bit >>= 1;
+	}
+	return i;
+}
+
+u8 is_alpha(u16 let)
+{
+	return (to_upper(let) == 0) ? 0 : 1;
+}
+
+
 u8 get_num_rules(dict_node *node)
 {
 	return (node->size - sizeof(dict_node)) / sizeof(u32);
